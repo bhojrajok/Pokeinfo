@@ -73,7 +73,7 @@ export default function GamesView({ cls }) {
   };
 
   return (
-    <main className="flex-1 p-6 overflow-y-auto max-w-[1400px] w-full mx-auto animate-fadeIn space-y-6">
+    <main className="flex-1 p-6 overflow-y-auto max-w-[1400px] custom-scrollbar w-full mx-auto animate-fadeIn space-y-6">
       
       {/* HEADER ROW WITH COUNTER */}
       <div className={`border-b ${cls.border} pb-4 flex flex-col md:flex-row md:items-center justify-between gap-4`}>

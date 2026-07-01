@@ -120,7 +120,7 @@ export default function MoviesView({ cls }) {
   };
 
   return (
-    <main className="flex-1 p-6 overflow-y-auto max-w-[1200px] w-full mx-auto animate-fadeIn space-y-8">
+    <main className="flex-1 p-6 overflow-y-auto max-w-[1200px] custom-scrollbar w-full mx-auto animate-fadeIn space-y-8">
       
       {/* HEADER BAR */}
       <div className={`border-b ${cls.border} pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3`}>

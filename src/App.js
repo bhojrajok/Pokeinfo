@@ -163,7 +163,6 @@ export default function App() {
         const cached = detailCache.current[id];
         setSelectedPokemon(cached.profile);
         setThemeColor(cached.theme);
-        setTypeWeaknesses(cached.weaknesses);
         setEvolutionChain(cached.evolution);
       }
       return;
@@ -181,14 +180,6 @@ export default function App() {
       const typeMetadata = POKEMON_TYPES.find(t => t.name === primaryTypeName);
       const computedTheme = typeMetadata ? typeMetadata.accent : '#3b82f6';
 
-      const damagePromises = profile.types.map(t => fetch(t.type.url).then(r => r.json()));
-      const typeDataObjects = await Promise.all(damagePromises);
-      const weaknesses = [];
-      typeDataObjects.forEach(obj => {
-        obj.damage_relations.double_damage_from.forEach(df => {
-          if (!weaknesses.includes(df.name)) weaknesses.push(df.name);
-        });
-      });
 
       const speciesRes = await fetch(profile.species.url);
       const speciesData = await speciesRes.json();
@@ -196,12 +187,11 @@ export default function App() {
       const evoData = await evoRes.json();
       const evolution = parseEvolutionChain(evoData.chain);
 
-      detailCache.current[id] = { profile, theme: computedTheme, weaknesses, evolution };
+      detailCache.current[id] = { profile, theme: computedTheme, evolution };
 
       if (writeToState) {
         setSelectedPokemon(profile);
         setThemeColor(computedTheme);
-        setTypeWeaknesses(weaknesses);
         setEvolutionChain(evolution);
       }
     } catch (err) {
